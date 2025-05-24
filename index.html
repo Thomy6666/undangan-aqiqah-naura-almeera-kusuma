@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Undangan Aqiqah | Candra Agung Wicaksana</title>
+    <title>Undangan Aqiqah | Naura Almeera Kusuma</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -32,6 +32,10 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <style>
+    body.overflow-hidden {
+      overflow: hidden;
+    }
+
     .circle {
       width: 80px;
       height: 80px;
@@ -83,7 +87,11 @@
             <div>detik</div>
           </div>
         </div>
-        <a href="#home" class="btn btn-lg mt-4" onClick="enableScroll()"
+        <a
+          href="#home"
+          class="btn btn-lg mt-4 fs-lg-4 fs-md-5 fs-1"
+          id="lihatUndangan"
+          onClick="enableScroll()"
           >Lihat Undangan</a
         >
       </main>
@@ -240,9 +248,10 @@
                 referrerpolicy="no-referrer-when-downgrade"
                 ></iframe> -->
               <iframe
+                class="col-lg-10 col-10"
                 src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d3972.4492601647116!2d105.2811778!3d-5.348191!3m2!1i1024!2i768!4f13.1!2m1!1sJl%20Tirtaria%20GG%20Mawar%20Putih%204%20Puri%20Luvena%20No%208%20Waykandis%20tanjung%20senang%20Bandar%20Lampung!5e0!3m2!1sid!2sid!4v1748088874017!5m2!1sid!2sid"
-                width="600"
-                height="450"
+                width="100%"
+                height="250"
                 style="border: 0"
                 allowfullscreen=""
                 loading="lazy"
@@ -497,9 +506,12 @@
         <div class="row">
           <div class="col text-center fs-4">
             <small class="block"
-              >&copy; 2024 by
+              >&copy; 2025 by
               <medium class="block"
-                ><a href="https://instagram.com/_ikhwnysrhh">@</a></medium
+                ><a
+                  href="https://www.instagram.com/malesbanget.corp_?igsh=MXc0eHV3OHR0bmdpYQ=="
+                  >malesbanget.corp_</a
+                ></medium
               >
               . All Rights Reserved.</small
             >
@@ -603,8 +615,10 @@
       let isPlaying = false;
 
       function disableScroll() {
-        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft =
+          window.pageXOffset || document.documentElement.scrollLeft;
 
         window.onscroll = function () {
           window.scrollTo(scrollTop, scrollLeft);
@@ -614,9 +628,8 @@
       }
 
       function enableScroll() {
-        window.onscroll = function () {};
+        window.onscroll = null; // hilangkan pembatasan scroll
         rootElement.style.scrollBehavior = "smooth";
-        // localStorage.setItem('opened', 'true');
         playAudio();
       }
 
@@ -625,6 +638,8 @@
         audioIconWrapper.style.display = "flex";
         song.play();
         isPlaying = true;
+        audioIcon.classList.add("bi-disc");
+        audioIcon.classList.remove("bi-pause-circle");
       }
 
       audioIconWrapper.onclick = function () {
@@ -637,15 +652,18 @@
           audioIcon.classList.add("bi-disc");
           audioIcon.classList.remove("bi-pause-circle");
         }
-
         isPlaying = !isPlaying;
       };
 
-      // if (!localStorage.getItem('opened')) {
-      //   disableScroll();
-      // }
+      // Disable scroll langsung saat halaman dimuat
       disableScroll();
+
+      // Aktifkan scroll dan mulai audio saat tombol "Lihat Undangan" diklik
+      document.getElementById("lihatUndangan").addEventListener("click", () => {
+        enableScroll();
+      });
     </script>
+
     <script>
       window.addEventListener("load", function () {
         const form = document.getElementById("my-form");
